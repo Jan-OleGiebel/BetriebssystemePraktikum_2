@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-
+#define EXECVP_FAIL_CD 255
 
 bool startsWith(char *string, char *what) {
     uint wl=strlen(what);
@@ -33,7 +33,7 @@ long getFirstSpace(char * str) {
 }
 
 
-void main() {
+int main() {
 
 
     char *username = getenv("USER");
@@ -85,15 +85,25 @@ void main() {
                 int s=strlen(lineIn);
 
                 if (lineIn[s-1]!='&') {
-                    waitpid(PID,status,0);
-                    printf("Child Process Exited with %i\n",status);
+                    waitpid(PID,&status,0);
+
+
+                    int exit_code = WEXITSTATUS(status);
+                    if (exit_code == EXECVP_FAIL_CD) {
+                        printf("comand '%s' not found\n",lineIn);
+                    }else {
+                        printf("Exited with %i\n",exit_code);
+                    }
+
 
                 }
 
 
 
             }else {
-                char **argv1 = 0;
+                char argv[1][200];
+
+
 
                 long s=getFirstSpace(lineIn);
 
@@ -104,8 +114,14 @@ void main() {
                 if (lineIn[st-1]=='&') {
                     lineIn[st-1]=0; // remove & for execution
                 }
-                int ret=execvp(lineIn,argv1);
-                int r=0;
+
+
+
+
+
+                int ret=execvp(lineIn,argv);
+
+                return ret;
             }
 
 
@@ -113,6 +129,7 @@ void main() {
 
 
     }
+    return 0;
 
 
 }
