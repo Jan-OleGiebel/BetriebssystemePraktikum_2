@@ -61,6 +61,7 @@ int main() {
             }
         }
         else if (strncmp(lineIn,"quit",4) == 0) {
+            printf("Exiting Shell bey\n");
             exit(0);
         }
         else {
@@ -80,7 +81,9 @@ int main() {
                     if (exit_code == EXECVP_FAIL_CD) {
                         printf("command '%s' not found\n",lineIn);
                     }else {
-                        printf("Exited with %i\n",exit_code);
+                        printf("'");
+                        printf(lineIn);
+                        printf("' Exited with %i\n",exit_code);
                     }
                 }
             }else {
