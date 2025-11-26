@@ -52,7 +52,7 @@ int main() {
         lineIn[strlen(lineIn)-1]=0; //remove newline
 
         if (startsWith(lineIn,"/")) {
-            char* path=lineIn+1;
+            char* path=lineIn;
             int worked=chdir(path);
 
             if (worked<0) {
