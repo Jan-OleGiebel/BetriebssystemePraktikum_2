@@ -47,7 +47,7 @@ int main() {
 
         fgets(lineIn,sizeof(lineIn)-10,stdin);
 
-        lineIn[8999]=0; //safty
+        lineIn[8999]=0; //safety
 
         lineIn[strlen(lineIn)-1]=0; //remove newline
 
@@ -79,7 +79,7 @@ int main() {
 
                     int exit_code = WEXITSTATUS(status);
                     if (exit_code == EXECVP_FAIL_CD) {
-                        printf("comand '%s' not found\n",lineIn);
+                        printf("command '%s' not found\n",lineIn);
                     }else {
                         printf("Exited with %i\n",exit_code);
                     }
@@ -89,7 +89,7 @@ int main() {
 
                 long s=getFirstSpace(lineIn);
 
-                lineIn[s]=0; //termainate arguments after that
+                lineIn[s]=0; //terminate arguments after that
 
                 int st=strlen(lineIn);
 
