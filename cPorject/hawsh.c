@@ -52,8 +52,7 @@ int main() {
         lineIn[strlen(lineIn)-1]=0; //remove newline
 
         if (startsWith(lineIn,"/")) {
-            char* path=lineIn;
-            int worked=chdir(path);
+            int worked=chdir(lineIn);
 
             if (worked<0) {
                 printf("Unable to Locate path '%s'",lineIn);
