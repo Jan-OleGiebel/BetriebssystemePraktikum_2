@@ -19,10 +19,9 @@ bool startsWith(char *string, char *what) {
 
     if (wl>sl)return false;
 
-
     return strncmp(string,what,wl)==0;
-
 }
+
 long getFirstSpace(char * str) {
     char *first_space = strchr(str, ' ');
     if (first_space != NULL) {
@@ -32,21 +31,13 @@ long getFirstSpace(char * str) {
     return -1;
 }
 
-
 int main() {
-
-
     char *username = getenv("USER");
     char curentDir[2000];
 
-
-
     printf(curentDir);
 
-
-
     char lineIn[9002];
-
 
     while (true) {
         curentDir[0]=0;
@@ -81,12 +72,10 @@ int main() {
             }
             if (PID>0) {
                 int status;
-
                 int s=strlen(lineIn);
 
                 if (lineIn[s-1]!='&') {
                     waitpid(PID,&status,0);
-
 
                     int exit_code = WEXITSTATUS(status);
                     if (exit_code == EXECVP_FAIL_CD) {
@@ -94,16 +83,9 @@ int main() {
                     }else {
                         printf("Exited with %i\n",exit_code);
                     }
-
-
                 }
-
-
-
             }else {
-                char argv[1][200];
-
-
+                char *const argv[1];
 
                 long s=getFirstSpace(lineIn);
 
@@ -115,21 +97,11 @@ int main() {
                     lineIn[st-1]=0; // remove & for execution
                 }
 
-
-
-
-
                 int ret=execvp(lineIn,argv);
 
                 return ret;
             }
-
-
         }
-
-
     }
     return 0;
-
-
 }
