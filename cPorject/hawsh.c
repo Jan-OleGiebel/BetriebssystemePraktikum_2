@@ -43,7 +43,9 @@ int main() {
         curentDir[0]=0;
         getcwd(curentDir,1998);
         printf("\n%s @ %s> ",username,curentDir);
+
         fflush(stdout);
+        fflush(stderr);
 
         fgets(lineIn,sizeof(lineIn)-10,stdin);
 
